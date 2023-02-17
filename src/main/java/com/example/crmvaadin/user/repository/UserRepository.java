@@ -10,4 +10,6 @@ public interface UserRepository {
     List<UserEntity> getAll();
 
     UserEntity addUser(UserEntity userEntity);
+
+    UserEntity getUserByUserName(String userName);
 }

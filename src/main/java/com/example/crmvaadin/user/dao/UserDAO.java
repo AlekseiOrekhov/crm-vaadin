@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface UserDAO extends JpaRepository<UserEntity, Long> {
 //    Optional<UserEntity> (UserEntity userEntity);
 //    Long getUserEntityByid
+    Optional<UserEntity> getByUserName(String s);
 }

@@ -30,4 +30,9 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return null;
     }
+
+    @Override
+    public UserEntity getUserByUserName(String userName) {
+        return userDAO.getByUserName(userName).orElse(null);
+    }
 }
