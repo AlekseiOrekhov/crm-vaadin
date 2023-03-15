@@ -1,4 +1,4 @@
-package com.example.crmvaadin;
+package com.example.crmvaadin.frontend;
 
 import com.example.crmvaadin.user.exceptions.UserException;
 import com.example.crmvaadin.user.service.UserService;
