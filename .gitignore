@@ -1,6 +1,9 @@
 node_modules
 HELP.md
-.gradle
+.gradle/7.6
+.gradle/buildOutputCleanup
+.gradle/vcs-1
+.gradle/file-system.probe
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
