@@ -1,4 +1,8 @@
+
 pluginManagement {
+    plugins {
+        id 'maven-publish'
+    }
     repositories {
         maven {
             name = "GitHubPackages"
