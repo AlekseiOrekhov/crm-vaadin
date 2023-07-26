@@ -7,7 +7,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class}, scanBasePackages={
+        "com.example.crmvaadin"})
+@EnableAsync
+@EnableScheduling
 public class CrmVaadinApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
