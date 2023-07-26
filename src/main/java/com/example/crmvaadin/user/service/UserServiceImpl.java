@@ -5,19 +5,24 @@ import com.example.crmvaadin.user.exceptions.UserException;
 import com.example.crmvaadin.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Component
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
+//    private final UserRepository userRepository;
+
+
     @Override
     public List<UserEntity> getAll() {
-        return userRepository.getAll();
+        return null;
+//        return userRepository.findAll();
     }
 
     @Override
@@ -30,13 +35,15 @@ public class UserServiceImpl implements UserService {
             if (!validateNewUserData(user)) {
                 throw new UserException("User с таким id уже зарегестрирован");
             }
-            return userRepository.addUser(user);
+            return null;
+//            return userRepository.save(user);
         } else {
             return null;
         }
     }
 
     private Boolean validateNewUserData(UserEntity userEntity) {
-        return userRepository.getUserByUserName(userEntity.getUserName()) == null;
+//        return userRepository.getAllByUserName(userEntity.getUserName()) == null;
+        return false;
     }
 }

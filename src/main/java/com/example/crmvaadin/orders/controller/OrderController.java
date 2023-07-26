@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController()
-@RequestMapping("/api/v1/order")
-@RequiredArgsConstructor
+//@RestController()
+//@RequestMapping("/api/v1/order")
+//@RequiredArgsConstructor
 public class OrderController {
 
-    private final OrderService orderService;
-    @GetMapping("/getStatus")
-    public boolean status() {
-        return true;
-    }
-
-    @PostMapping("/add")
-    public void add() {
-        orderService.add();
-    }
+//    private final OrderService orderService;
+//    @GetMapping("/getStatus")
+//    public boolean status() {
+//        return true;
+//    }
+//
+//    @PostMapping("/add")
+//    public void add() {
+//        orderService.add();
+//    }
 }
