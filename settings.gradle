@@ -1,11 +1,13 @@
 pluginManagement {
-    plugins {
-    id("com.gradle.enterprise") version("3.13.4")
-    }
     repositories {
-        maven { url 'https://repo.spring.io/milestone' }
-        maven { url 'https://repo.spring.io/snapshot' }
-        gradlePluginPortal()
+        maven {
+            name = "GitHubPackages"
+            url = "https://github.com/AlekseiOrekhov/crm-vaadin"
+//            credentials {
+//                username = System.getenv("GITHUB_ACTOR")
+//                password = System.getenv("GITHUB_TOKEN")
+//            }
+        }
     }
 }
 rootProject.name = 'crm-vaadin'
