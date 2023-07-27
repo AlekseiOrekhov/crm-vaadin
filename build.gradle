@@ -57,8 +57,12 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            // change to point to your repo, e.g. http://my.org/repo
             url = layout.buildDirectory.dir('https://github.com/AlekseiOrekhov/crm-vaadin')
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+
         }
     }
 }
