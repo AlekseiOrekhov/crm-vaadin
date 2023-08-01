@@ -37,8 +37,8 @@ jobs:
         
     - name: Login to Amazon ECR
       id: login-ecr
-      run: echo ${{ secrets.AWS_ECR_REGISTRY_URL }} | docker login --username AWS --password-stdin https://$(cut -d'/' -f1 <<<${{ secrets.AWS_ECR_REGISTRY_URL }})
-
+      uses: aws-actions/amazon-ecr-login@v1
+      
     - name: Build with Gradle
       run: ./gradlew vaadinBuildFrontend build
 
