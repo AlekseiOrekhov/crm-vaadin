@@ -49,4 +49,6 @@ jobs:
         IMAGE_TAG: crm-vaadin
       run: | 
         docker build . --file Dockerfile --tag crm-vaadin:latest
-        docker push ${{ secrets.AWS_ECR_REGISTRY_URL }}/crm-vaadin:latest
+        docker tag crm-vaadin:latest ${{ secrets.AWS_ECR_REGISTRY_URL }}/crm-vaadin:latest
+    - name: Docker push
+      run: docker push ${{ secrets.AWS_ECR_REGISTRY_URL }}/crm-vaadin:latest
