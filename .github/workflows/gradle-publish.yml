@@ -40,7 +40,7 @@ jobs:
         
     - name: Login to Amazon ECR
       id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
+      run: echo ${{ secrets.AWS_ECR_REGISTRY_URL }} | docker login --username AWS --password-stdin https://$(cut -d'/' -f1 <<<${{ secrets.AWS_ECR_REGISTRY_URL }})
       
     - name: Build the Docker image
       env:
@@ -50,4 +50,4 @@ jobs:
       run: docker build . --file Dockerfile --tag crm-vaadin:latest
       
     - name: Docker push
-      run: docker push crm-vaadin:latest
+      run: docker push ${{ secrets.AWS_ECR_REGISTRY_URL }}/crm-vaadin:latest
