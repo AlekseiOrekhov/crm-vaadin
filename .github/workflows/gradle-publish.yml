@@ -18,13 +18,6 @@ jobs:
 
     steps:
 
-    - name: Set up SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "$AWS_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.AWS_ECR_REGISTRY_IP }} >> ~/.ssh/known_hosts
-
     - name: Run Remote Command on AWS
       uses: appleboy/ssh-action@master
       with:
