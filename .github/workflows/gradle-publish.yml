@@ -35,12 +35,11 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.AWS_ECR_REGISTRY_URL }}
-        username: lexx.orekhov@mail.ru  # Change this to your AWS service's SSH username
+        username: ec2-user  # Change this to your AWS service's SSH username
         key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
         script: |
           # Add your remote commands here
           echo "Hello from AWS service!"
-          ls -al /path/to/your/remote/directory
     
     
     - uses: actions/checkout@v3
