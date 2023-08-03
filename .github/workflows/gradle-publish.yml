@@ -59,11 +59,8 @@ jobs:
      
     - name: Tag Image for Docker Hub
       run: |
-        docker tag docker.pkg.github.com/${{ github.repository_owner }}/${{ github.repository_name }}/crm-vaadin:latest ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
+        docker tag docker.pkg.github.com/${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin/crm-vaadin:latest ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
       
     - name: Push Image to Docker Hub
       run: |
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
-      
-    - name: Docker push to DockerHub
-      run: docker push ${{ secrets.AWS_ECR_REGISTRY_URL }}/$ECR_REPOSITORY
