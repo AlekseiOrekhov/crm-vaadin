@@ -47,7 +47,7 @@ jobs:
     
     - name: Pull Image from GitHub Packages
       run: |
-        docker pull docker.pkg.github.com/${{ github.repository_owner }}/${{ github.repository_name }}/crm-vaadin:latest
+        docker pull docker.pkg.github.com/${{ github.repository_owner }}/crm-vaadin/crm-vaadin:latest
 
     
     - name: Build with Gradle
