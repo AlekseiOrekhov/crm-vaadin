@@ -56,15 +56,10 @@ jobs:
       run: |
         docker build . --file Dockerfile --tag crm-vaadin:latest
         # docker tag crm-vaadin:latest ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
-     
-    - name: Pull Image from GitHub Packages
-      run: |
-        docker pull docker.pkg.github.com/${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
-
     
     - name: Tag Image for Docker Hub
       run: |
-        docker tag docker.pkg.github.com/${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest crm-vaadin:latest
+        docker tag ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest crm-vaadin:latest
       
     - name: Push Image to Docker Hub
       run: |
