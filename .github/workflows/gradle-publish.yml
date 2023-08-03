@@ -41,7 +41,12 @@ jobs:
       
     - name: Build with Gradle
       run: ./gradlew vaadinBuildFrontend build
-
+    
+    - name: login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
      
     - name: Build the Docker image
       env:
@@ -50,11 +55,11 @@ jobs:
         IMAGE_TAG: crm-vaadin
       run: |
         docker build . --file Dockerfile --tag crm-vaadin:latest
-        docker tag crm-vaadin:latest ${{ secrets.AWS_ECR_REGISTRY_URL }}/crm-vaadin:latest
+        # docker tag crm-vaadin:latest ${{ secrets.AWS_ECR_REGISTRY_URL }}/crm-vaadin:latest
       
-    - name: Docker push
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: crm-vaadin
-        IMAGE_TAG: latest
+    - name: Push Image to Docker Hub
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
+      
+    - name: Docker push to DockerHub
       run: docker push ${{ secrets.AWS_ECR_REGISTRY_URL }}/$ECR_REPOSITORY
