@@ -17,17 +17,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-    - name: Run Remote Command on AWS
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.AWS_ECR_REGISTRY_IP }}
-        username: ec2-user  # Change this to your AWS service's SSH username
-        key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
-        script: |
-          # Add your remote commands here
-          echo "Hello from AWS service!"
-    
     
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -37,11 +26,7 @@ jobs:
         distribution: 'temurin'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-     
-     
-    
-
-      
+        
     - name: login to DockerHub
       uses: docker/login-action@v1
       with:
@@ -61,5 +46,50 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
+        
+    - name: Stop all containers
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.AWS_ECR_REGISTRY_IP }}
+        username: ec2-user  # Change this to your AWS service's SSH username
+        key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+        script: |
+          docker stop $(docker ps -aq)
+    
+    - name: Delete all containers
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.AWS_ECR_REGISTRY_IP }}
+        username: ec2-user  # Change this to your AWS service's SSH username
+        key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+        script: |
+          docker rm $(docker ps -aq)
+          
+    - name: Delete all images
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.AWS_ECR_REGISTRY_IP }}
+        username: ec2-user  # Change this to your AWS service's SSH username
+        key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+        script: |
+          docker rmi $(docker images -q)
+          
+    - name: Pull new image from dockerHub
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.AWS_ECR_REGISTRY_IP }}
+        username: ec2-user  # Change this to your AWS service's SSH username
+        key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+        script: |
+          sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
+          
+    - name: Pull new image from dockerHub
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.AWS_ECR_REGISTRY_IP }}
+        username: ec2-user  # Change this to your AWS service's SSH username
+        key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+        script: |
+          sudo docker run -d -p 80:8080 ${{ secrets.DOCKERHUB_USERNAME }}/lesson1:v0.2
 
     
