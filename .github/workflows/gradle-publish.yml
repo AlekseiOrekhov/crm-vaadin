@@ -30,40 +30,18 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
      
      
-     
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+    - name: AWS SSM Send-Command
+      uses: peterkimzz/aws-ssm-send-command@master
+      id: ssm
       with:
+        aws-region: ${{ secrets.AWS_REGION }}
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
-        
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-    
-    - name: Install SSH Client
-      run: sudo apt-get update && sudo apt-get install -y openssh-client
+        instance-ids: ${{ secrets.INSTANCE_ID }}
 
-    - name: Set up SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "$AWS_SECRET_ACCESS_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.AWS_ECR_REGISTRY_URL }} >> ~/.ssh/known_hosts
-
-    - name: Run Remote Command on AWS
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.AWS_ECR_REGISTRY_URL }}
-        username: ec2-user  # Change this to your instance's SSH username
-        key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        script: |
-          # Add your remote commands here
-          echo "Hello from AWS!"
-          ls -al /path/to/your/remote/directory
- 
-      
+        working-directory: /home/ubuntu/application
+        command: ls -al
+        comment: Hello world! 
       
       
     - name: login to DockerHub
