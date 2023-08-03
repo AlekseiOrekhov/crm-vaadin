@@ -20,16 +20,7 @@ jobs:
       packages: write
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
-     
-     
+    
     - name: Install SSH Client
       run: sudo apt-get update && sudo apt-get install -y openssh-client
 
@@ -50,6 +41,19 @@ jobs:
           # Add your remote commands here
           echo "Hello from AWS service!"
           ls -al /path/to/your/remote/directory
+    
+    
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        settings-path: ${{ github.workspace }} # location for the settings.xml file
+     
+     
+    
 
       
     - name: login to DockerHub
