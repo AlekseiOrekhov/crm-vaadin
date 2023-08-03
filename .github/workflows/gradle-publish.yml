@@ -83,7 +83,7 @@ jobs:
         script: |
           sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
           
-    - name: Pull new image from dockerHub
+    - name: Start new container
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.AWS_ECR_REGISTRY_IP }}
