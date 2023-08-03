@@ -55,7 +55,11 @@ jobs:
         IMAGE_TAG: crm-vaadin
       run: |
         docker build . --file Dockerfile --tag crm-vaadin:latest
-        # docker tag crm-vaadin:latest ${{ secrets.AWS_ECR_REGISTRY_URL }}/crm-vaadin:latest
+        # docker tag crm-vaadin:latest ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
+     
+    - name: Tag Image for Docker Hub
+      run: |
+        docker tag docker.pkg.github.com/${{ github.repository_owner }}/${{ github.repository_name }}/crm-vaadin:latest ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
       
     - name: Push Image to Docker Hub
       run: |
