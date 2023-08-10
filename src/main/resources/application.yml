@@ -1,8 +1,4 @@
 spring:
-  datasource:
-    url: ${db.url}
-    username: ${db.username}
-    password: ${db.password}
   jpa:
     hibernate:
       ddl-auto: update
@@ -11,3 +7,4 @@ logging:
   level:
     web: debug
     swagger: debug
+
