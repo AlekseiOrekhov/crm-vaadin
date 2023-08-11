@@ -92,4 +92,10 @@ jobs:
         username: ec2-user  # Change this to your AWS service's SSH username
         key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
         script: |
-          sudo docker run --env ENV=prod POSTGRES_URL=${{ secrets.POSTGRES_URL }} --env POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} --env POSTGRES_DATABASE_NAME=${{ secrets.POSTGRES_DATABASE_NAME }} --env POSTGRES_USER_NAME=${{ secrets.POSTGRES_USER_NAME }} --env POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} -d -p 80:8080 ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
+          sudo docker run -e ENV=prod \
+          -e POSTGRES_URL=${{ secrets.POSTGRES_URL }} \
+          -e POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} \
+          -e POSTGRES_DATABASE_NAME=${{ secrets.POSTGRES_DATABASE_NAME }} \
+          -e POSTGRES_USER_NAME=${{ secrets.POSTGRES_USER_NAME }} \
+          -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+          -d -p 80:8080 ${{ secrets.DOCKERHUB_USERNAME }}/crm-vaadin:latest
