@@ -6,6 +6,7 @@ ENV POSTGRES_URL=POSTGRES_URL \
     POSTGRES_USER_NAME=POSTGRES_USER_NAME \
     POSTGRES_PASSWORD=POSTGRES_PASSWORD
 COPY  build/libs/crm-vaadin-0.0.1-SNAPSHOT.jar crm-vaadin-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
 ENTRYPOINT ["java", "-Dspring.profiles.active=${ENV}" , "-jar","/crm-vaadin-0.0.1-SNAPSHOT.jar"]
 
 
