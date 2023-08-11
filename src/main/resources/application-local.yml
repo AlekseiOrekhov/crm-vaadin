@@ -3,6 +3,7 @@ spring:
     url: ${db.url}
     username: ${db.username}
     password: ${db.password}
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update

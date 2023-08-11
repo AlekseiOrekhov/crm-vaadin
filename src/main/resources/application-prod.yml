@@ -3,3 +3,4 @@ spring:
     url: jdbc:postgresql://${POSTGRES_URL}:${POSTGRES_PORT}/${POSTGRES_DATABASE_NAME}
     username: ${POSTGRES_USER_NAME}
     password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
