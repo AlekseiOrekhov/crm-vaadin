@@ -56,7 +56,7 @@ jobs:
         username: ec2-user  # Change this to your AWS service's SSH username
         key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
         script: |
-          docker stop $(docker ps -aq)
+          docker stop $(docker ps -aq) || true
     
     - name: Delete all containers
       uses: appleboy/ssh-action@master
@@ -65,7 +65,7 @@ jobs:
         username: ec2-user  # Change this to your AWS service's SSH username
         key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
         script: |
-          docker rm $(docker ps -aq)
+          docker rm $(docker ps -aq) || true
           
     - name: Delete all images
       uses: appleboy/ssh-action@master
@@ -74,7 +74,7 @@ jobs:
         username: ec2-user  # Change this to your AWS service's SSH username
         key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
         script: |
-          docker rmi $(docker images -q)
+          docker rmi $(docker images -q) || true
           
     - name: Pull new image from dockerHub
       uses: appleboy/ssh-action@master
